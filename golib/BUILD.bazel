@@ -1,0 +1,17 @@
+
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "golib",
+    srcs = ["lib.go"],
+    cdeps = ["//clib"],
+    importpath = "golib",
+    cgo = True,
+)
+
+go_test(
+    name = "golib_test",
+    srcs = ["lib_test.go"],
+    embed = [":golib"],
+    gotags = ["clib"],
+)
